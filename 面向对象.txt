@@ -1,0 +1,57 @@
+面向对象：
+
+	JFrame
+	JPanel
+	TextArea
+	Button
+	
+	E-Mail
+		String MailName:邮件名称
+		String MailPath：邮件路径
+		String MailContent：邮件内容
+		
+	原始A,B,C,D表示的含义
+		
+	Word（一级词库存储词）
+		String WordName：词名
+		String WordPOS：词性
+		int num_t_c ;A 表示属于c 类且包含t 的文档频数 ,等于DF（t），等于N(X=x_i,C=c_j  )
+		int num_t_nc;B 表示不属于c 类但是包含t 的文档频数 ,
+		
+		//C,D,是词的属性，但是与全部文档有关，
+		int num_nt_c;C 表示属于c类但是不包含 t 的文档频数,
+		int num_nt_nc;D 是既不属于 c 也不包含 t 的文档频数
+
+	将A,B,C,D的含义具体到该课题上，只有两类文本，ham正常邮件、spam垃圾邮件
+
+	Word（一级词库存储词）ham正常邮件
+		int ID ；序列号
+		String WordName：词名
+		String WordPOS：词性
+		int num_t_c ;A 表示在正常邮件集中包含词 t的文档频数 ,
+		int num_t_nc;B 表示在垃圾邮件集中包含词t 的文档频数 ,
+		
+		//C,D,是词的属性，但是与全部文档有关，
+		int num_nt_c;C 表示在正常邮件集中不包含 t 的文档频数,
+		int num_nt_nc;D 表示在垃圾邮件集中不包含 t 的文档频数
+	
+	Word（一级词库存储词）spam垃圾邮件
+		int ID ；序列号
+		String WordName：词名
+		String WordPOS：词性
+		int num_t_c ;A 表示在垃圾邮件集中包含t 的文档频数 ,
+		int num_t_nc;B 表示在正常邮件集中包含t 的文档频数 ,
+		
+		//C,D,是词的属性，但是与全部文档有关，
+		int num_nt_c;C 表示在垃圾邮件集中不包含 t 的文档频数,
+		int num_nt_nc;D 表示在正常邮件集中不包含 t 的文档频数
+	
+	由以上两个表的字段分析可以得出，只需建立一个一级词库表即可，同时存储每个词的所属不同的类别的文档频数。
+	
+	计算每个词的CHI(ham)和CHI(spam),则，该词的CHI(t)=MAX(C1,C2)	,则该词用来表示CHI较大的那类文档
+	
+	由此，将所有关键词，分为两类，分别存储在两张二级表中。再由每张表中的数据计算出所属分类概率
+	
+	KeyWord（二级词库存储词）
+	
+	
